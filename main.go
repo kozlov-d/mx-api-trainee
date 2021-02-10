@@ -2,19 +2,18 @@ package main
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
 	"os"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 )
 
-var db *sql.DB
+var db *pgxpool.Pool
 
 var (
 	host     = os.Getenv("POSTGRES_HOST")
 	port     = os.Getenv("POSTGRES_PORT")
-	user     = os.Getenv("POSTGRES_USERNAME")
+	user     = os.Getenv("POSTGRES_USER")
 	password = os.Getenv("POSTGRES_PASSWORD")
 	dbname   = os.Getenv("POSTGRES_DB")
 )
