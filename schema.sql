@@ -3,12 +3,12 @@ CREATE TABLE IF NOT EXISTS Merchants (
 );
 
 CREATE TABLE IF NOT EXISTS Offers (
-    Id SERIAL PRIMARY KEY,
     OfferId INT NOT NULL,
     OfferName VARCHAR(100) NOT NULL,
     Price INT NOT NULL,
     Quantity INT NOT NULL,
-    CHECK((Price > 0) AND (Quantity > 0) AND (OfferName !='')),
     MerchantId INT NOT NULL,
+    CONSTRAINT compound PRIMARY KEY(OfferId, MerchantId),
     FOREIGN KEY (MerchantId) REFERENCES Merchants (MerchantId)
+    ON UPDATE CASCADE
 );
