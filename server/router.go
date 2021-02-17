@@ -1,9 +1,13 @@
 package server
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strings"
 	"time"
+
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 //Route describes each route
@@ -16,7 +20,9 @@ type Route struct {
 
 func contentTypeMiddleware(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Content-Type", "application/json; charset=UTF-8")
+		if !strings.Contains(r.RequestURI, "swagger") {
+			w.Header().Add("Content-Type", "application/json; charset=UTF-8")
+		}
 		h.ServeHTTP(w, r)
 	})
 }
@@ -35,6 +41,12 @@ func loggerMiddleware(h http.Handler) http.Handler {
 }
 
 func (s *Server) setupRouter() {
+	s.Router.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
+		httpSwagger.URL(fmt.Sprintf("http://localhost:%s/swagger/doc.json", s.Config.AppConfig.Port)),
+		httpSwagger.DeepLinking(true),
+		httpSwagger.DocExpansion("none"),
+		httpSwagger.DomID("#swagger-ui"),
+	))
 	s.Router.Use(loggerMiddleware)
 	s.Router.Use(contentTypeMiddleware)
 	var routes = []Route{
@@ -100,8 +112,7 @@ func (s *Server) setupRouter() {
 		},
 	}
 	for _, route := range routes {
-		var handler http.Handler
-		handler = route.Handler
+		handler := route.Handler
 		s.Router.
 			Methods(route.Method).
 			PathPrefix(route.Path).

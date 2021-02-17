@@ -40,8 +40,8 @@ type Offer struct {
 	OfferName  string `json:"name"`
 	Price      int    `json:"price"`
 	Quantity   int    `json:"quantity"`
-	MerchantID int    `json:"-"`
-	Available  bool   `json:"-"`
+	MerchantID int    `json:"-" swaggerignore:"true"`
+	Available  bool   `json:"-" swaggerignore:"true"`
 }
 
 //Convert row to origin offer
