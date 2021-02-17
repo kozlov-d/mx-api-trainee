@@ -14,6 +14,7 @@ import (
 	"github.com/tealeg/xlsx/v3"
 )
 
+//Server wraps all necessary objects
 type Server struct {
 	Router *mux.Router
 	Data   *data.Data
