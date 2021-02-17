@@ -12,7 +12,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "${APP_PORT}"
+      - "${APP_PORT}:${APP_PORT}"
 
   postgres:
     image: postgres:13.1-alpine
