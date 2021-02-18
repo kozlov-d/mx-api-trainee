@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	_ "net/http/pprof"
+
 	_ "github.com/kozlov-d/mx-api-trainee/docs"
 
 	"github.com/kozlov-d/mx-api-trainee/common"

@@ -47,6 +47,7 @@ func (s *Server) setupRouter() {
 		httpSwagger.DocExpansion("none"),
 		httpSwagger.DomID("#swagger-ui"),
 	))
+	s.Router.PathPrefix("/debug/pprof/").Handler(http.DefaultServeMux)
 	s.Router.Use(loggerMiddleware)
 	s.Router.Use(contentTypeMiddleware)
 	var routes = []Route{

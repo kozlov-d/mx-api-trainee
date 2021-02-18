@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "8adeb7d1-0711-411d-9712-849a5d7fc226",
+		"name": "get",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/tasks/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/tasks/{{$randomInt}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"{{$randomInt}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/offers?merchantId=10",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/offers?offerId={{$randomInt}}&merchantId={{$randomInt}}&sub={{$randomAlphaNumeric}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"offers"
+					],
+					"query": [
+						{
+							"key": "offerId",
+							"value": "{{$randomInt}}"
+						},
+						{
+							"key": "merchantId",
+							"value": "{{$randomInt}}"
+						},
+						{
+							"key": "sub",
+							"value": "{{$randomAlphaNumeric}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

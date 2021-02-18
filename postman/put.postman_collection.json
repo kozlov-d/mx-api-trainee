@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "73a3ebb2-23f8-4075-b8ec-2eab0cdb917c",
+		"name": "put",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/merchants/{id}",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"link\":\"http://localhost:3001/offers_1.xlsx\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/merchants/{{$randomInt}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"merchants",
+						"{{$randomInt}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

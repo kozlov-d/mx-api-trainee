@@ -20,7 +20,7 @@ type Data struct {
 func (d *Data) InitializeDB(dbc common.DBConfig) {
 	connString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		dbc.Host, dbc.Port, dbc.User, dbc.Password, dbc.Name)
-	pool, err := pgxpool.Connect(context.TODO(), connString)
+	pool, err := pgxpool.Connect(context.Background(), connString)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -32,7 +32,7 @@ func (d *Data) GetMerchants(oID, mID int, sub string) []*common.Merchant {
 	($1 = 0 OR offerid=$1) AND 
 	($2 = 0 OR merchantid=$2) AND 
 	($3 = '' OR offername LIKE ('%' || $3 || '%'))`
-	rows, err := d.db.Query(context.TODO(), sel, oID, mID, sub)
+	rows, err := d.db.Query(context.Background(), sel, oID, mID, sub)
 	merchants := []*common.Merchant{}
 	if err != nil {
 		if err == pgx.ErrNoRows {
@@ -83,7 +83,7 @@ func (d *Data) UpsertMerchant(ID int) (*common.Merchant, error) {
 	DO UPDATE SET merchantid=EXCLUDED.merchantid 
 	RETURNING *`
 	m := common.Merchant{}
-	err := d.db.QueryRow(context.TODO(), ups, ID).Scan(&m.MerchantID)
+	err := d.db.QueryRow(context.Background(), ups, ID).Scan(&m.MerchantID)
 	if err != nil {
 		if err == pgx.ErrNoRows {
 			return nil, nil
@@ -96,7 +96,7 @@ func (d *Data) UpsertMerchant(ID int) (*common.Merchant, error) {
 //DeleteOffer with given offer and merchant IDs
 func (d *Data) DeleteOffer(oID, mID int) (int64, error) {
 	del := `DELETE FROM offers WHERE offerid=$1 AND merchantid=$2`
-	tag, err := d.db.Exec(context.TODO(), del, oID, mID)
+	tag, err := d.db.Exec(context.Background(), del, oID, mID)
 	if err != nil {
 		return 0, err
 	}
@@ -106,7 +106,7 @@ func (d *Data) DeleteOffer(oID, mID int) (int64, error) {
 func (d *Data) SelectOffer(oID, mID int) (*common.Offer, error) {
 	sel := `SELECT * FROM offers WHERE offerid=$1 AND merchantid=$2`
 	o := &common.Offer{}
-	err := d.db.QueryRow(context.TODO(), sel, oID, mID).
+	err := d.db.QueryRow(context.Background(), sel, oID, mID).
 		Scan(&o.OfferID, &o.OfferName, &o.Price, &o.Quantity, &o.MerchantID)
 	if err != nil {
 		if err == pgx.ErrNoRows {
@@ -122,7 +122,7 @@ func (d *Data) InsertOffer(o *common.Offer, mID int) error {
 	offers(offerid, offername, price, quantity, merchantid) 
 	VALUES ($1, $2, $3, $4, $5) RETURNING *`
 	scan := &common.Offer{} //mb should be returned
-	err := d.db.QueryRow(context.TODO(), ins,
+	err := d.db.QueryRow(context.Background(), ins,
 		o.OfferID, o.OfferName, o.Price, o.Quantity, mID).
 		Scan(&scan.OfferID, &scan.OfferName, &scan.Price, &scan.Quantity, &scan.MerchantID)
 	if err != nil {
@@ -137,7 +137,7 @@ func (d *Data) InsertOffer(o *common.Offer, mID int) error {
 func (d *Data) UpdateOffer(o *common.Offer) error {
 	upd := `UPDATE offers SET offername=$2, price=$3, quantity=$4 
 	WHERE offerid=$1 AND merchantid=$5`
-	err := d.db.QueryRow(context.TODO(), upd,
+	err := d.db.QueryRow(context.Background(), upd,
 		o.OfferID, o.OfferName, o.Price, o.Quantity, o.MerchantID).Scan()
 	if err != nil {
 		if err == pgx.ErrNoRows {
