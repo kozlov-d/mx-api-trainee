@@ -36,22 +36,22 @@ Merchant | Offer
 
 ``` curl -X PUT -i http://localhost:3000/merchants/20 -d "{\"link\":\"http://localhost:3001/offers.xlsx\"}" ```
 
-![Put request](https://github.com/kozlov-d/mx-api-trainee/docs/put.png)
+![Put request](https://github.com/kozlov-d/mx-api-trainee/blob/main/docs/put.png)
 
 ```curl -X GET -i -G localhost:3000/tasks/1```
 
 После окончания обработки:
 
-![Get tasks request](https://github.com/kozlov-d/mx-api-trainee/docs/get_task_completed.png)
+![Get tasks request](https://github.com/kozlov-d/mx-api-trainee/blob/main/docs/get_task_completed.png)
 
 ```curl -X GET -i -G localhost:3000/offers? --data-urlencode "sub=ABCT"```
 
-![Put request](https://github.com/kozlov-d/mx-api-trainee/docs/get_offers.png)
+![Put request](https://github.com/kozlov-d/mx-api-trainee/blob/main/docs/get_offers.png)
 
 ## Усложнения
 - [x] Асинхронная работа
 - [x] Нагрузочное тестирование
-- [] Юнит-тесты
+- [ ] Юнит-тесты
 
 ## Тесты k6
 
@@ -59,16 +59,16 @@ Merchant | Offer
   
 С помощью pprof изучим объекты в куче. Выделив топ-20, можно прийти к выводу, что большая часть размещается библиотекой чтения .xlsx, а также запросом к БД. Это также видно исходя из графа (здесь не отображен), полученного командой web. Некоторые из запросов к БД возвращают указатель на структуру, отсюда и появление их в топе pprof.
 
-![top_20](https://github.com/kozlov-d/mx-api-trainee/docs/top_20_alloc.png)
+![top_20](https://github.com/kozlov-d/mx-api-trainee/blob/main/docs/top_20_alloc.png)
 
   
 Из графиков Grafana видно, что минимальная длительность запроса повысилась с увеличением VUs, а RPS, хоть и возрос, но видны заметные скачки. Для первого теста mean req_duration ~6ms, а для второго - уже 130ms
 
-![put_test](https://github.com/kozlov-d/mx-api-trainee/docs/grafana_120_250.png)
+![put_test](https://github.com/kozlov-d/mx-api-trainee/blob/main/docs/grafana_120_250.png)
 
 Для GET запросов RPS >1k, с заметными перепадами, а max длительность запроса >1.5sec.
 
-![get_test](https://github.com/kozlov-d/mx-api-trainee/docs/staged_get_test.png)
+![get_test](https://github.com/kozlov-d/mx-api-trainee/blob/main/docs/staged_get_test.png)
 
 Собрать статистику по обработке файлов можно было бы с помощью pandas, предварительно получив с сервера массив всех Tasks, и, например, определить среднее затраченное время на обработку, зависимость времени обработки от индекса задачи
 
