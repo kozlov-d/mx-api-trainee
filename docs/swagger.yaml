@@ -15,16 +15,16 @@ definitions:
     required:
     - link
     type: object
-  common.Merchant:
+  Merchant:
     properties:
       id:
         type: integer
       offers:
         items:
-          $ref: '#/definitions/common.Offer'
+          $ref: '#/definitions/Offer'
         type: array
     type: object
-  common.Offer:
+  Offer:
     properties:
       id:
         type: integer
@@ -35,7 +35,7 @@ definitions:
       quantity:
         type: integer
     type: object
-  common.Task:
+  Task:
     properties:
       created:
         type: integer
@@ -115,7 +115,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/common.Merchant'
+              $ref: '#/definitions/Merchant'
             type: array
         "400":
           description: Bad Request
@@ -137,7 +137,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/common.Task'
+            $ref: '#/definitions/Task'
         "400":
           description: Bad Request
           schema:

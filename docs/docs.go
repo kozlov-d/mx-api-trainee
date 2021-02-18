@@ -107,7 +107,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/common.Merchant"
+                                "$ref": "#/definitions/Merchant"
                             }
                         }
                     },
@@ -139,7 +139,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/common.Task"
+                            "$ref": "#/definitions/Task"
                         }
                     },
                     "400": {
@@ -176,7 +176,7 @@ var doc = `{
                 }
             }
         },
-        "common.Merchant": {
+        "Merchant": {
             "type": "object",
             "properties": {
                 "id": {
@@ -185,12 +185,12 @@ var doc = `{
                 "offers": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/common.Offer"
+                        "$ref": "#/definitions/Offer"
                     }
                 }
             }
         },
-        "common.Offer": {
+        "Offer": {
             "type": "object",
             "properties": {
                 "id": {
@@ -207,7 +207,7 @@ var doc = `{
                 }
             }
         },
-        "common.Task": {
+        "Task": {
             "type": "object",
             "properties": {
                 "created": {

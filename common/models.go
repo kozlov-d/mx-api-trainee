@@ -8,13 +8,13 @@ type Task struct {
 	Updated     int    `json:"updated"`
 	Missed      int    `json:"missed"`
 	Deleted     int    `json:"deleted"`
-}
+} //@name Task
 
 //Merchant represents record in DB
 type Merchant struct {
 	MerchantID int     `json:"id"`
 	Offers     []Offer `json:"offers"`
-}
+} //@name Merchant
 
 //ContainsOffer returns true if merchant contain offer with given ID
 func (m *Merchant) ContainsOffer(oID int) bool {
@@ -42,7 +42,7 @@ type Offer struct {
 	Quantity   int    `json:"quantity"`
 	MerchantID int    `json:"-" swaggerignore:"true"`
 	Available  bool   `json:"-" swaggerignore:"true"`
-}
+} //@name Offer
 
 //Convert row to origin offer
 func Convert(or OfferRow) *Offer {

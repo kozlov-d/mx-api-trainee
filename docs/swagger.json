@@ -90,7 +90,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/common.Merchant"
+                                "$ref": "#/definitions/Merchant"
                             }
                         }
                     },
@@ -122,7 +122,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/common.Task"
+                            "$ref": "#/definitions/Task"
                         }
                     },
                     "400": {
@@ -159,7 +159,7 @@
                 }
             }
         },
-        "common.Merchant": {
+        "Merchant": {
             "type": "object",
             "properties": {
                 "id": {
@@ -168,12 +168,12 @@
                 "offers": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/common.Offer"
+                        "$ref": "#/definitions/Offer"
                     }
                 }
             }
         },
-        "common.Offer": {
+        "Offer": {
             "type": "object",
             "properties": {
                 "id": {
@@ -190,7 +190,7 @@
                 }
             }
         },
-        "common.Task": {
+        "Task": {
             "type": "object",
             "properties": {
                 "created": {
