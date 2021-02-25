@@ -247,7 +247,7 @@ type swaggerInfo struct {
 var SwaggerInfo = swaggerInfo{
 	Version:     "",
 	Host:        "localhost",
-	BasePath:    "/",
+	BasePath:    ":3000/",
 	Schemes:     []string{},
 	Title:       "MerchantX Trainee API",
 	Description: "",

@@ -14,7 +14,7 @@ import (
 // @title MerchantX Trainee API
 // @license.name
 // @host localhost
-// @BasePath /
+// @BasePath :3000/
 func main() {
 	conf := common.FromEnv()
 	s := server.NewServer(conf)

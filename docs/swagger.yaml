@@ -1,4 +1,4 @@
-basePath: /
+basePath: :3000/
 definitions:
   CommonResponse:
     properties:
