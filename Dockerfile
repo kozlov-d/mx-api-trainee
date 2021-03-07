@@ -12,6 +12,7 @@ FROM alpine:3.13 AS app
 RUN apk update && apk add postgresql-client
 COPY wait-for-postgres.sh /go/src/wait-for-postgres.sh
 COPY --from=compile-image /go/bin/mx-api-trainee /go/bin/mx-api-trainee
+RUN chmod +x /go/src/wait-for-postgres.sh
 ENTRYPOINT  [ "/go/src/wait-for-postgres.sh" ]
 # cmd is redundant, running app from entrypoint
 # CMD [ "./go/bin/mx-api-trainee" ]
